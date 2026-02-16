@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c514d8f7b9fc5970bdd94287905ef584",
+    "content-hash": "9294a481c441a6a4960f3510cd7c5444",
     "packages": [
         {
             "name": "brick/math",
@@ -6005,6 +6005,39 @@
                 }
             ],
             "time": "2024-11-21T01:49:47+00:00"
+        },
+        {
+            "name": "yazan/autocrud",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "packages/yazan/autocrud",
+                "reference": "8bb7b576fc8bc425d210c90066cb4b77b31c870e"
+            },
+            "require": {
+                "illuminate/support": "^11.0|^12.0",
+                "php": "^8.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Yazan\\AutoCrud\\AutoCrudServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Yazan\\AutoCrud\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "CRUD generator for laravel",
+            "transport-options": {
+                "relative": true
+            }
         }
     ],
     "packages-dev": [
@@ -8386,7 +8419,7 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "stability-flags": {},
     "prefer-stable": true,
     "prefer-lowest": false,
