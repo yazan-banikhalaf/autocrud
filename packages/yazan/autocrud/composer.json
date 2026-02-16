@@ -1,0 +1,22 @@
+{
+    "name": "yazan/autocrud",
+    "description": "CRUD generator for laravel",
+    "type": "library",
+    "require": {
+        "php": "^8.2",
+        "illuminate/support": "^11.0"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Yazan\\AutoCrud\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Yazan\\AutoCrud\\AutoCrudServiceProvider"
+            ]
+        }
+    }
+}
