@@ -17,8 +17,6 @@ class GenerateCrudCommand extends Command
     {
         $fileName = $this->argument('MigrationFileName');
         $filePath = base_path('database/migrations/' . $fileName);
-        $parser = new MigrationParser($filePath);
-        $modelGenerator = new ModelGenerator();
 
         if (! file_exists($filePath)) {
             $this->error('❌ Migration file not found: ' . $filePath);
@@ -26,15 +24,29 @@ class GenerateCrudCommand extends Command
             return 1;
         }
 
+        $this->info('📂 Migration file found.');
+
+        $parser = new MigrationParser($filePath);
+
         $tableNames = $parser->getMigrationName();
-        $tableColumns = $parser->getColumns();
-        Log::info($modelGenerator->editFileContent($filePath));
-        if (count($tableNames) == 0 || count($tableNames) > 1) {
-            $this->error('The migration file needs to have exactly one table');
-            return 1;
+
+        if (count($tableNames) === 0) {
+            $this->warn('⚠️ No tables detected in this migration.');
+            return self::FAILURE;
         }
 
-        $this->info('✅ Migration file found!');
+        if (count($tableNames) > 1) {
+            $this->error('❌ The migration file must contain exactly one table.');
+            return self::FAILURE;
+        }
+
+        $this->comment('🔄 Generating model...');
+
+        $modelGenerator = new ModelGenerator();
+
+        $modelGenerator->addFileContent($filePath);
+
+        $this->info('✅ Model added successfully!');
 
         return 0;
     }

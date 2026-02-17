@@ -7,7 +7,7 @@ use Illuminate\Support\Str;
 
 class ModelGenerator
 {
-    public function editFileContent(string $filePath): void
+    public function addFileContent(string $filePath): void
     {
         $parser = new MigrationParser($filePath);
 

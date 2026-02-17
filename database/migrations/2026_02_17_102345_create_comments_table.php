@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
             $table->text('body');
-            $table->unsignedBigInteger('user_id');
+
             $table->foreignId('post_id')->constrained('posts');
             $table->foreignId('user_id')->constrained('users');
+
             $table->softDeletes();
             $table->timestamps();
         });
