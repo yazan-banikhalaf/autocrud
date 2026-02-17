@@ -46,7 +46,7 @@ class ModelGenerator
         return file_get_contents(__DIR__ . '/../Stubs/model.stub');
     }
 
-    private function resolveModelName(string $tableName): string
+    public function resolveModelName(string $tableName): string
     {
         return Str::studly(Str::singular($tableName));
     }

@@ -4,6 +4,7 @@ namespace Yazan\AutoCrud\Commands;
 
 use Illuminate\Console\Command;
 use Log;
+use Yazan\AutoCrud\Generators\ControllerGenerator;
 use Yazan\AutoCrud\Generators\ModelGenerator;
 use Yazan\AutoCrud\Services\MigrationParser;
 
@@ -47,6 +48,14 @@ class GenerateCrudCommand extends Command
         $modelGenerator->generate($filePath);
 
         $this->info('✅ Model added successfully!');
+
+        $this->comment('🔄 Generating controller...');
+
+        $controllerGenerator = new ControllerGenerator();
+
+        $controllerGenerator->generate($filePath);
+
+        $this->info('✅ Controller added successfully!');
 
         return 0;
     }

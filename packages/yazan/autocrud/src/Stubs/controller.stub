@@ -1,0 +1,49 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use {{ importModel }}
+use {{ importRequest }}
+class {{ controllerName }} extends Controller
+{
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store({{ requestName }} $request)
+    {
+        $data = $request->validated();
+
+        {{ modelName }}::create($data);
+
+        return '{{ variable }} created successfully';
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show({{ modelName }} ${{ variable }})
+    {
+        return ${{ variable }};
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update({{ requestName }} $request, {{ modelName }} ${{ variable }})
+    {
+        $data = $request->validated();
+
+        {{ modelName }}::update($data);
+
+        return '{{ variable }} updated successfully';
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy({{ modelName }} ${{ variable }})
+    {
+        return ${{ variable }}->delete();
+    }
+}
