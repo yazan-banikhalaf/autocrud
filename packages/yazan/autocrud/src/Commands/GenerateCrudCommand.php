@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use Log;
 use Yazan\AutoCrud\Generators\ControllerGenerator;
 use Yazan\AutoCrud\Generators\ModelGenerator;
+use Yazan\AutoCrud\Generators\RequestGenerator;
 use Yazan\AutoCrud\Services\MigrationParser;
 
 class GenerateCrudCommand extends Command
@@ -48,6 +49,14 @@ class GenerateCrudCommand extends Command
         $modelGenerator->generate($filePath);
 
         $this->info('✅ Model added successfully!');
+
+        $this->comment('🔄 Generating request...');
+
+        $requestGenerator = new RequestGenerator();
+
+        $requestGenerator->generate($filePath);
+
+        $this->info('✅ Request added successfully!');
 
         $this->comment('🔄 Generating controller...');
 

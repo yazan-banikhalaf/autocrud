@@ -34,7 +34,7 @@ class PostController extends Controller
     {
         $data = $request->validated();
 
-        Post::update($data);
+        $post->update($data);
 
         return 'post updated successfully';
     }

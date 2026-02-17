@@ -34,7 +34,7 @@ class {{ controllerName }} extends Controller
     {
         $data = $request->validated();
 
-        {{ modelName }}::update($data);
+        ${{ variable }}->update($data);
 
         return '{{ variable }} updated successfully';
     }

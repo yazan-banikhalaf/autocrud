@@ -49,7 +49,7 @@ class ControllerGenerator
         return "App\Http\Requests\\" . $this->resolveRequestName($tableName) . ";";
     }
 
-    private function resolveRequestName(string $tableName): string
+    public function resolveRequestName(string $tableName): string
     {
         return Str::studly(Str::singular($tableName) . 'Request');
     }
