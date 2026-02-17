@@ -13,7 +13,7 @@ class MigrationParser
         $this->filePath = $filePath;
     }
 
-    public function getMigrationNames(): array
+    public function getMigrationName(): array
     {
         $contents = $this->getContent();
 
@@ -27,10 +27,34 @@ class MigrationParser
 
         preg_match_all('/\$table->(\w+)\([\'"](\w+)[\'"]\)([^;]*);/', $contents, $matches);
 
-        return $matches;
+        return $this->extractColumnMetadata($matches);
     }
     private function getContent(): string
     {
         return file_get_contents($this->filePath);
+    }
+
+    private function extractColumnMetadata(array $matches): array
+    {
+        $columns = [];
+        for ($i = 0; $i < count($matches[1]); $i++) {
+            $modifiers = $matches[3][$i];
+
+            $columns[] = [
+                'name' => $matches[2][$i],
+                'type' => $matches[1][$i],
+                'nullable' => str_contains($modifiers, "->nullable()"),
+                'unique' => str_contains($modifiers, "->unique()"),
+            ];
+        }
+
+        return $columns;
+    }
+
+    public function hasSoftDelete(): bool
+    {
+        $content = $this->getContent();
+
+        return str_contains($content, 'deleted_at') || str_contains($content, "->softDeletes();");
     }
 }

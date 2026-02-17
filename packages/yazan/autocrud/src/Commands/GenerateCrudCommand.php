@@ -4,6 +4,7 @@ namespace Yazan\AutoCrud\Commands;
 
 use Illuminate\Console\Command;
 use Log;
+use Yazan\AutoCrud\Generators\ModelGenerator;
 use Yazan\AutoCrud\Services\MigrationParser;
 
 class GenerateCrudCommand extends Command
@@ -17,6 +18,7 @@ class GenerateCrudCommand extends Command
         $fileName = $this->argument('MigrationFileName');
         $filePath = base_path('database/migrations/' . $fileName);
         $parser = new MigrationParser($filePath);
+        $modelGenerator = new ModelGenerator();
 
         if (! file_exists($filePath)) {
             $this->error('❌ Migration file not found: ' . $filePath);
@@ -24,9 +26,9 @@ class GenerateCrudCommand extends Command
             return 1;
         }
 
-        $tableNames = $parser->getMigrationNames();
+        $tableNames = $parser->getMigrationName();
         $tableColumns = $parser->getColumns();
-        Log::info($tableColumns);
+        Log::info($modelGenerator->editFileContent($filePath));
         if (count($tableNames) == 0 || count($tableNames) > 1) {
             $this->error('The migration file needs to have exactly one table');
             return 1;
