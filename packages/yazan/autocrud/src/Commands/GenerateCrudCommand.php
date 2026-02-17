@@ -44,7 +44,7 @@ class GenerateCrudCommand extends Command
 
         $modelGenerator = new ModelGenerator();
 
-        $modelGenerator->addFileContent($filePath);
+        $modelGenerator->generate($filePath);
 
         $this->info('✅ Model added successfully!');
 
